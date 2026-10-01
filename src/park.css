@@ -1,0 +1,40 @@
+/* Pastel storybook playfield. Visible copy is limited to the park title. */
+.cat-park {
+  --park-ink:#514b64; --park-paper:#fffaf0; --park-line:#d8c7b5;
+  --park-accent:#b87357; --park-lit:#a77725; --park-lit-bg:#fff1cf;
+  --park-soft:#dce6ee; --park-white:#fff; --park-shadow:#765f4920;
+  --park-night-zenith:#040614; --park-night-middle:#0c1025; --park-night-horizon:#1b1d36;
+  --park-font:'PingFang SC','Microsoft YaHei',sans-serif;
+  --park-display:Georgia,'Songti SC',serif;
+  position:relative; isolation:isolate; width:100%; height:100svh; min-height:440px;
+  overflow:clip; color:var(--park-ink); background:var(--park-paper);
+  border:12px solid var(--park-paper); font-family:var(--park-font);
+}
+.cat-park * { box-sizing:border-box; }
+.park-sky { position:absolute; inset:0; background:url('/sky.png') center/cover; z-index:-2; }
+.park-sky::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,var(--park-night-zenith),var(--park-night-middle) 52%,var(--park-night-horizon)); opacity:0; transition:opacity 1.6s ease; }
+.park-night .park-sky::after { opacity:.97; }
+.park-world { position:absolute; inset:0; outline:none; touch-action:none; cursor:default; }
+.park-world:focus-visible { outline:2px solid var(--park-accent); outline-offset:-3px; }
+.park-world canvas { display:block; width:100%; height:100%; touch-action:none; }
+.park-heading { position:absolute; top:31px; left:37px; pointer-events:none; z-index:2; }
+.park-heading h1 { font:500 34px/1.35 var(--park-display); font-style:normal; letter-spacing:4px; margin:0; }
+.park-tools { position:absolute; right:29px; top:28px; display:flex; gap:10px; align-items:center; z-index:3; }
+.park-icon-button { display:flex; align-items:center; justify-content:center; width:42px; height:42px; padding:0; border:1px solid var(--park-line); border-radius:50%; background:var(--park-paper); color:var(--park-ink); box-shadow:0 2px 0 var(--park-shadow); }
+.park-icon-button:hover { transform:translateY(-2px); background:var(--park-white); }
+.park-loading,.park-error { position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); text-align:center; background:var(--park-paper); padding:23px; border-radius:18px; box-shadow:0 10px 40px var(--park-shadow); }
+.park-loading svg { color:var(--park-accent); }
+.park-error { max-width:85%; font-size:14px; line-height:1.7; }
+.park-error .park-icon-button { margin:14px auto 0; }
+.park-ride-nav { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; gap:5px; background:var(--park-paper); border:1px solid var(--park-line); padding:6px; border-radius:18px; box-shadow:0 7px 24px var(--park-shadow); }
+.park-ride-nav button { width:58px; height:56px; padding:8px; border:0; border-radius:12px; background:transparent; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; color:var(--park-accent); }
+.park-ride-nav button:hover { background:var(--park-soft); transform:translateY(-2px); }
+.park-ride-nav button.is-lit { background:var(--park-lit-bg); color:var(--park-lit); }
+.park-ride-dot { width:3px; height:3px; border-radius:50%; background:currentColor; opacity:.18; }
+.park-ride-dot.found { opacity:.8; }
+.park-ride-nav button.is-lit .park-ride-dot { box-shadow:0 0 6px var(--park-lit); }
+.park-night { --park-ink:#fff2dc; --park-line:#81728b; --park-paper:#1d2038; --park-accent:#ffcf91; --park-lit-bg:#726043; --park-lit:#ffe1a1; --park-soft:#30344f; --park-white:#30344f; border-color:var(--park-paper); }
+@media(min-width:1700px) { .park-heading{left:55px;top:40px}.park-heading h1{font-size:40px}.park-ride-nav{bottom:34px} }
+@media(max-width:700px) { .cat-park{border-width:7px}.park-heading{left:21px;top:25px}.park-heading h1{font-size:27px;letter-spacing:3px}.park-tools{right:16px;top:21px;gap:8px}.park-icon-button{width:37px;height:37px}.park-ride-nav{bottom:22px;gap:3px;padding:5px}.park-ride-nav button{width:48px;height:50px}.park-ride-nav svg{width:22px} }
+@media(max-width:360px) { .park-heading{left:14px;top:24px}.park-heading h1{font-size:24px;letter-spacing:2px}.park-tools{right:12px;gap:6px}.park-icon-button{width:34px;height:34px}.park-ride-nav button{width:43px} }
+@media(prefers-reduced-motion:reduce) { .cat-park *,.cat-park *::after{transition:none!important} }
